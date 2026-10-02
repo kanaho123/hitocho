@@ -1,5 +1,6 @@
 import type {
   ApiErrorResponse,
+  ConfigDTO,
   CreateSceneInput,
   PersonDetailDTO,
   PersonListItemDTO,
@@ -41,4 +42,8 @@ export function getPeople(): Promise<PersonListItemDTO[]> {
 
 export function getPerson(id: number): Promise<PersonDetailDTO> {
   return request(`/api/people/${id}`);
+}
+
+export function getConfig(): Promise<ConfigDTO> {
+  return request("/api/config");
 }

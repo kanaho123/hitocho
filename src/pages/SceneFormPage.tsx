@@ -11,6 +11,7 @@ import {
 import type { PersonListItemDTO, SceneDTO } from "../../shared/types";
 
 type Props = {
+  readOnly: boolean;
   onDone: () => void;
 };
 
@@ -19,7 +20,7 @@ type DuplicateCandidate = {
   personId: number;
 };
 
-export function SceneFormPage({ onDone }: Props) {
+export function SceneFormPage({ readOnly, onDone }: Props) {
   const [existingPeople, setExistingPeople] = useState<PersonListItemDTO[]>([]);
   const [selectedPersonIds, setSelectedPersonIds] = useState<number[]>([]);
   const [newPeople, setNewPeople] = useState<string[]>([]);
@@ -133,12 +134,26 @@ export function SceneFormPage({ onDone }: Props) {
     } catch (err) {
       if (err instanceof ApiError && err.fields) {
         setFieldErrors(err.fields as SceneFieldErrors);
+      } else if (err instanceof ApiError) {
+        setSubmitError(err.message);
       } else {
         setSubmitError("保存に失敗しました。もう一度お試しください。");
       }
     } finally {
       setSubmitting(false);
     }
+  }
+
+  if (readOnly) {
+    return (
+      <section>
+        <h1>Sceneを追加する</h1>
+        <p>このデモは閲覧専用です。新規登録はローカル環境でお試しください。</p>
+        <button type="button" onClick={onDone}>
+          戻る
+        </button>
+      </section>
+    );
   }
 
   if (savedScene) {

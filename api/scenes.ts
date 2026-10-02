@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import type { Prisma } from "@prisma/client";
 import { prisma } from "./_lib/prisma.js";
+import { isReadOnlyDemo } from "./_lib/env.js";
 import { validatePersonName, validateSceneInput } from "../shared/validation.js";
 import type {
   ApiErrorResponse,
@@ -29,6 +30,14 @@ async function handleGet(res: VercelResponse) {
 }
 
 async function handlePost(req: VercelRequest, res: VercelResponse) {
+  if (isReadOnlyDemo()) {
+    const errorBody: ApiErrorResponse = {
+      error: "このデモは閲覧専用です。新規登録は本番環境では行えません。",
+    };
+    res.status(403).json(errorBody);
+    return;
+  }
+
   const body = req.body as Partial<CreateSceneInput> | undefined;
 
   const date = typeof body?.date === "string" ? body.date : "";

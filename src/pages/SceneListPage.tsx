@@ -4,10 +4,11 @@ import { SceneCard } from "../components/SceneCard";
 import type { SceneDTO } from "../../shared/types";
 
 type Props = {
+  readOnly: boolean;
   onAddScene: () => void;
 };
 
-export function SceneListPage({ onAddScene }: Props) {
+export function SceneListPage({ readOnly, onAddScene }: Props) {
   const [scenes, setScenes] = useState<SceneDTO[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,9 +30,13 @@ export function SceneListPage({ onAddScene }: Props) {
     <section>
       <div className="page-header">
         <h1>Scene一覧</h1>
-        <button type="button" onClick={onAddScene}>
-          Sceneを追加する
-        </button>
+        {readOnly ? (
+          <span className="hint">閲覧専用のため登録できません</span>
+        ) : (
+          <button type="button" onClick={onAddScene}>
+            Sceneを追加する
+          </button>
+        )}
       </div>
 
       {error && <p className="error-text">{error}</p>}

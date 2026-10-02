@@ -29,6 +29,10 @@ export type CreateSceneInput = {
   newPersonNames: string[];
 };
 
+export type ConfigDTO = {
+  readOnly: boolean;
+};
+
 export type FieldErrors = Record<string, string>;
 
 export type ApiErrorResponse = {

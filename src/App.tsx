@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { getConfig } from "./api";
 import { SceneListPage } from "./pages/SceneListPage";
 import { SceneFormPage } from "./pages/SceneFormPage";
 import { PersonListPage } from "./pages/PersonListPage";
@@ -14,11 +15,20 @@ type View =
 function App() {
   const [view, setView] = useState<View>({ name: "scenes" });
   const [sceneListKey, setSceneListKey] = useState(0);
+  const [readOnly, setReadOnly] = useState(false);
+
+  useEffect(() => {
+    getConfig()
+      .then((config) => setReadOnly(config.readOnly))
+      .catch(() => setReadOnly(false));
+  }, []);
 
   return (
     <>
       <p className="demo-notice">
-        デモ版：架空の名前・内容でお試しください（ログイン機能はなく、URLを知っていれば誰でも閲覧・投稿できます）
+        {readOnly
+          ? "デモ版（閲覧専用）：架空の名前・内容のサンプルです。このデモ環境からの新規登録はできません。"
+          : "デモ版：架空の名前・内容でお試しください（ログイン機能はなく、URLを知っていれば誰でも閲覧・投稿できます）"}
       </p>
       <nav className="main-nav">
         <button type="button" onClick={() => setView({ name: "scenes" })}>
@@ -33,12 +43,14 @@ function App() {
         {view.name === "scenes" && (
           <SceneListPage
             key={sceneListKey}
+            readOnly={readOnly}
             onAddScene={() => setView({ name: "newScene" })}
           />
         )}
 
         {view.name === "newScene" && (
           <SceneFormPage
+            readOnly={readOnly}
             onDone={() => {
               setSceneListKey((k) => k + 1);
               setView({ name: "scenes" });
