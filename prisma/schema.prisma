@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Person {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  scenes    Scene[]
+}
+
+model Scene {
+  id        Int      @id @default(autoincrement())
+  date      DateTime @db.Date
+  title     String
+  story     String?
+  createdAt DateTime @default(now())
+  people    Person[]
+}

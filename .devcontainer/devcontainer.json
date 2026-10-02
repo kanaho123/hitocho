@@ -1,0 +1,39 @@
+{
+  "name": "KANSAI AI BOOTCAMP 2026",
+  "build": { "dockerfile": "Dockerfile" },
+  "remoteUser": "node",
+
+  "containerEnv": {
+    "TZ": "Asia/Tokyo",
+    // ログイン状態は ~/.claude と ~/.claude.json の両方がそろって復元される。
+    // .claude.json は既定でボリュームの外に書かれるため、書き込み先をボリューム内に寄せる。
+    // これを外すとコンテナを作り直すたびにログインし直しになる。
+    "CLAUDE_CONFIG_DIR": "/home/node/.claude"
+  },
+
+  "customizations": {
+    "vscode": {
+      // Claude Code は Dockerfile 側で node ユーザーとして入れている（自動更新を効かせるため）。
+      // 拡張はここで明示的に入れる。
+      "extensions": ["anthropic.claude-code"],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.autoSave": "afterDelay"
+      }
+    }
+  },
+
+  "mounts": [
+    "source=kaib-claude,target=/home/node/.claude,type=volume",
+    "source=kaib-vercel,target=/home/node/.local/share/com.vercel.cli,type=volume"
+  ],
+
+  // Vite の開発サーバーの既定ポート。
+  "forwardPorts": [5173],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite",
+      "onAutoForward": "notify"
+    }
+  }
+}

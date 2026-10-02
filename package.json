@@ -1,0 +1,30 @@
+{
+  "name": "hitocho",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "prisma generate && tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "postinstall": "prisma generate",
+    "db:push": "node --env-file=.env.local node_modules/.bin/prisma db push"
+  },
+  "dependencies": {
+    "@prisma/client": "6.19.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vercel/node": "^17.0.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "prisma": "6.19.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  }
+}

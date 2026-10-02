@@ -1,0 +1,218 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.demo-notice {
+  font-size: 13px;
+  color: var(--text);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.main-nav button {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 16px;
+  color: var(--text-h);
+}
+
+button {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  min-height: 44px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.error-text {
+  display: block;
+  color: var(--danger);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.hint {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.field input[type="text"],
+.field input[type="date"],
+.field textarea {
+  font: inherit;
+  font-size: 16px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+fieldset.field {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.person-checklist,
+.chip-list,
+.scene-list,
+.person-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  text-align: left;
+}
+
+.person-checklist li {
+  margin-bottom: 4px;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  padding: 4px 6px 4px 12px;
+  font-size: 14px;
+}
+
+.chip button {
+  background: none;
+  color: inherit;
+  padding: 0 4px;
+}
+
+.add-person-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.add-person-row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.confirm-dialog {
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  border-radius: 6px;
+  text-align: left;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.form-actions button {
+  flex: 1;
+}
+
+.scene-list li {
+  margin-bottom: 12px;
+}
+
+.scene-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.scene-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  margin-bottom: 6px;
+}
+
+.scene-date {
+  color: var(--text);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.scene-people {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.scene-story {
+  white-space: pre-wrap;
+}
+
+.person-list-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-h);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.person-name {
+  font-weight: 600;
+}
+
+.person-scene-count {
+  font-size: 14px;
+  color: var(--text);
+}
